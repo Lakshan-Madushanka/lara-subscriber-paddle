@@ -12,7 +12,9 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    mariadb-client
+    mariadb-client \
+    nodejs npm
+
 
 #clean the repostory cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -34,4 +36,4 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 # Set working directory
 WORKDIR /var/www/html
 
- 
+
