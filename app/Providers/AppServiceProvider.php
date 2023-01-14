@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use Exception;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,9 +16,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        $this->registerLocallyAndTesting();
+        $this->registerLocally();
     }
 
     /**
@@ -21,8 +27,39 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
+    }
+
+    private function registerLocallyAndTesting(): void
+    {
+        if ($this->app->environment(['local', 'testing'])) {
+            Model::shouldBeStrict();
+        }
+    }
+
+    private function registerLocally(): void
+    {
+        if ($this->app->environment(['local'])) {
+            $this->handleExceedingCumulativeQueryDuration();
+        }
+    }
+
+    private function handleExceedingCumulativeQueryDuration(): void
+    {
+        if ($this->app->runningInConsole()) {
+            return;
+        }
+
+        DB::listen(static function (QueryExecuted $event) {
+            if ($event->time > 500) {
+                throw new QueryException(
+                    $event->sql,
+                    $event->bindings,
+                    new Exception('Individual database query exceeded 500ms.')
+                );
+            }
+        });
     }
 }
