@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Jetstream;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,6 +22,8 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
         }
 
         $this->actingAs($user = User::factory()->create());
+
+        $user->refresh();
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
 

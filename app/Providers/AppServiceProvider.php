@@ -18,7 +18,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->registerLocallyAndTesting();
         $this->registerLocally();
     }
 
@@ -29,14 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-    }
+        Model::shouldBeStrict(! $this->app->isProduction());
 
-    private function registerLocallyAndTesting(): void
-    {
-        if ($this->app->environment(['local', 'testing'])) {
-            Model::shouldBeStrict();
-        }
     }
 
     private function registerLocally(): void
