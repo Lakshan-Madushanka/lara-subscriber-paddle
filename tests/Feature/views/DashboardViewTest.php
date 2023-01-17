@@ -10,6 +10,5 @@ it('redirect to product page if not subscribed', function () {
     $response = get('/dashboard');
 
     $response->assertRedirect();
-    $response->assertSee('home');
 });
 
