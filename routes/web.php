@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Plans\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,16 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::middleware(['auth:sanctum', 'unSubscribed'])->get('/', function () {
     return view('home');
 });
 
 Route::middleware([
     'auth:sanctum',
+    'subscribed',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::get('product', fn() => view('product'));
+
+
+Route::name('plans.')->prefix('plans')->group(function () {
+    Route::get('/', IndexController::class)->name('index');
 });
