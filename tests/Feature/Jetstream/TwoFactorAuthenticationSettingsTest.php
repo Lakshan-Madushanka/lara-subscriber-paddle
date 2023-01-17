@@ -46,6 +46,8 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
         $this->actingAs($user = User::factory()->create());
 
+        $user->refresh();
+
         $this->withSession(['auth.password_confirmed_at' => time()]);
 
         $component = Livewire::test(TwoFactorAuthenticationForm::class)
@@ -69,6 +71,8 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
         }
 
         $this->actingAs($user = User::factory()->create());
+
+        $user->refresh();
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
 
