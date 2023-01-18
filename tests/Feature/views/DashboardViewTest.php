@@ -11,4 +11,3 @@ it('redirect to product page if not subscribed', function () {
 
     $response->assertRedirect();
 });
-

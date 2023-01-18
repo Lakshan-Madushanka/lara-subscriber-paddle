@@ -17,7 +17,8 @@ return [
 
     'vendor_auth_code' => env('PADDLE_VENDOR_AUTH_CODE'),
 
-    'public_key' => env('PADDLE_PUBLIC_KEY'),
+    'public_key' => file_get_contents(__DIR__.'/../paddle.pem'),
+    //'public_key' => env('PADDLE_PUBLIC_KEY'),
 
     /*
     |--------------------------------------------------------------------------

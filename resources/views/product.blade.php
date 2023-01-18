@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
     <div class="min-h-screen flex justify-center items-center w-full ">
         <div class="flex justify-center w-full">
             <div class="rounded-lg shadow-2xl bg-white w-1/3">
@@ -13,4 +13,4 @@
             </div>
         </div>
     </div>
-</x-guest-layout>
+</x-app-layout>

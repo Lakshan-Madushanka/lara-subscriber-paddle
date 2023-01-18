@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Plans\IndexController;
+use App\Http\Controllers\Subscriptions\StoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,9 +30,12 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('product', fn() => view('product'));
-
+Route::get('product', fn () => view('product'))->name('product');
 
 Route::name('plans.')->prefix('plans')->group(function () {
     Route::get('/', IndexController::class)->name('index');
+});
+
+Route::name('subscriptions.')->prefix('subscriptions')->group(function () {
+    Route::middleware(['signed'])->get('/success', fn () => view('subscriptions.success'))->name('success');
 });

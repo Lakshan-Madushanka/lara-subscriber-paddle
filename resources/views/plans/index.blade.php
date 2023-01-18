@@ -1,4 +1,7 @@
 <x-app-layout>
+    @push('paddle')
+        @paddleJS
+    @endpush
     @forelse($plans as $plan)
         <div class="flex space-x-16 justify-center items-center">
             <div class="min-h-screen flex justify-center items-center">
@@ -12,11 +15,17 @@
                                 Initial: {{ $plan->initialPrice()->gross() }} -
                                 Recurring: {{ $plan->recurringPrice()->gross() }}
                             </p>
-                            <form action="" method="GET">
-                                <x-jet-button class="bg-blue-600 hover:bg-blue-700">
+
+                            <div class="flex justify-between">
+                                <x-paddle-button :url="$payLinks[$plan->product_id]" class="px-8 py-4">
                                     Subscribe
-                                </x-jet-button>
-                            </form>
+                                </x-paddle-button>
+                                @if(str_contains( strtolower($plan->product_title), 'month'))
+                                    <x-paddle-button :url="$payLinks['trial']" class="px-8 py-4">
+                                        Activate Trial
+                                    </x-paddle-button>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

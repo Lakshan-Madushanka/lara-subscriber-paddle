@@ -29,7 +29,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::shouldBeStrict(! $this->app->isProduction());
-
     }
 
     private function registerLocally(): void
