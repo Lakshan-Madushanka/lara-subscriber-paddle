@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Plans\IndexController;
-use App\Http\Controllers\Subscriptions\StoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
