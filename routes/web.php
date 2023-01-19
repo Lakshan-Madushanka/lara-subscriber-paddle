@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Plans\IndexController;
-use App\Http\Controllers\Subscriptions\StoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,12 +24,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', \App\Http\Controllers\Subscriptions\Receipts\IndexController::class)->name('dashboard');
 });
 
-Route::get('product', fn () => view('product'))->name('product');
+Route::middleware(['auth:sanctum', 'subscribed'])->get('product', fn () => view('product'))->name('product');
 
 Route::name('plans.')->prefix('plans')->group(function () {
     Route::get('/', IndexController::class)->name('index');
@@ -38,4 +35,12 @@ Route::name('plans.')->prefix('plans')->group(function () {
 
 Route::name('subscriptions.')->prefix('subscriptions')->group(function () {
     Route::middleware(['signed'])->get('/success', fn () => view('subscriptions.success'))->name('success');
+
+    Route::middleware(['subscribed'])->group(function () {
+        Route::get('/', \App\Http\Controllers\Subscriptions\IndexController::class)->name('index');
+
+        Route::name('receipts.')->prefix('receipts')->group(function () {
+            Route::get('/', \App\Http\Controllers\Subscriptions\Receipts\IndexController::class)->name('index');
+        });
+    });
 });

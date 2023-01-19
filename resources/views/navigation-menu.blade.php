@@ -16,8 +16,15 @@
                         <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-jet-nav-link>
-                    @endif
 
+                        <x-jet-nav-link href="{{ route('subscriptions.index') }}" :active="request()->routeIs('subscriptions.index')">
+                            {{ __('Subscriptions') }}
+                        </x-jet-nav-link>
+
+                        <x-jet-nav-link href="{{ route('subscriptions.receipts.index') }}" :active="request()->routeIs('subscriptions.receipts.index')">
+                            {{ __('Receipts') }}
+                        </x-jet-nav-link>
+                    @endif
                 </div>
             </div>
 

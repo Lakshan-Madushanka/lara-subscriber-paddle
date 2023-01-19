@@ -12,8 +12,8 @@ class SubscriptionService
     public const PLANS_IDS = [38932, 38933];
 
     /**
-     * @param Request $request
-     * @param Collection<int, ProductPrice> $plans
+     * @param  Request  $request
+     * @param  Collection<int, ProductPrice>  $plans
      * @return array<int|string, string>
      */
     public function getPayLinks(Request $request, Collection $plans): array

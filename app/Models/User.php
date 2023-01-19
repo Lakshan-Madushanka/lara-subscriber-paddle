@@ -29,6 +29,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
+ *
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -44,7 +45,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
+ *
  * @property int|null $current_team_id
  * @property string|null $profile_photo_path
  * @property-read \Laravel\Paddle\Customer|null $customer
@@ -52,6 +55,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $receipts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Paddle\Subscription[] $subscriptions
  * @property-read int|null $subscriptions_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCurrentTeamId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereProfilePhotoPath($value)
  */
