@@ -24,7 +24,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', \App\Http\Controllers\Subscriptions\Receipts\IndexController::class)->name('dashboard');
+    Route::get('/dashboard', fn () => redirect()->route('product'))->name('dashboard');
 });
 
 Route::middleware(['auth:sanctum', 'subscribed'])->get('product', fn () => view('product'))->name('product');

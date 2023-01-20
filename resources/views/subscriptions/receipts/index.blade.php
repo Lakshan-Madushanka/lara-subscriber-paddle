@@ -38,7 +38,7 @@
                                     {{$receipt->amount()}}
                                 </td>
                                 <td class="px-6 py-4">
-                                    Laptop
+                                    {{$receipt->paid_at->toFormattedDateString()}}
                                 </td>
                                 <td class="px-6 py-4">
                                     <a class="text-blue-600" href="{{ $receipt->receipt_url }}" target="_blank"
