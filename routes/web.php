@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Plans\IndexController;
+use App\Http\Controllers\Subscriptions\DestroyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,9 +39,10 @@ Route::name('subscriptions.')->prefix('subscriptions')->group(function () {
 
     Route::middleware(['subscribed'])->group(function () {
         Route::get('/', \App\Http\Controllers\Subscriptions\IndexController::class)->name('index');
+        Route::delete('/', DestroyController::class)->name('destroy');
 
         Route::name('receipts.')->prefix('receipts')->group(function () {
-            Route::get('/', \App\Http\Controllers\Subscriptions\Receipts\IndexController::class)->name('index');
+            Route::delete('/', \App\Http\Controllers\Subscriptions\Receipts\IndexController::class)->name('index');
         });
     });
 });

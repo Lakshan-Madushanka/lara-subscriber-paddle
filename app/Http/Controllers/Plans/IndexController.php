@@ -18,9 +18,12 @@ class IndexController extends Controller
 
         $payLinks = $subscriptionService->getPayLinks($request, $plans);
 
+        $hasSubscribed = $request->user()->subscription();
+
         return view('plans.index', [
             'plans' => $plans,
             'payLinks' => $payLinks,
+            'hasSubscribed' => ! is_null($hasSubscribed),
         ]);
     }
 }

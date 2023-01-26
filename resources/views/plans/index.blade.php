@@ -20,7 +20,7 @@
                                 <x-paddle-button :url="$payLinks[$plan->product_id]" class="px-8 py-4">
                                     Subscribe
                                 </x-paddle-button>
-                                @if(str_contains( strtolower($plan->product_title), 'month'))
+                                @if(str_contains( strtolower($plan->product_title), 'month') && !$hasSubscribed)
                                     <x-paddle-button :url="$payLinks['trial']" class="px-8 py-4">
                                         Activate Trial
                                     </x-paddle-button>

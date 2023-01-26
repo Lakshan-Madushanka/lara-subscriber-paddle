@@ -17,7 +17,7 @@
                             <p>Status</p>
                             <p class="bg-green-400 rounded p-1">{{ucfirst($subscription->paddle_status)}}</p>
                         </li>
-                        @if($subscription->paddle_status === 'trialing')
+                        @if($subscription->paddle_status === \Laravel\Paddle\Subscription::STATUS_TRIALING)
                             <li class="px-6 py-4 border-b border-gray-200 w-full flex justify-between items-center">
                                 <p>Trial ends at</p>
                                 <p>{{ucfirst($subscription->trial_ends_at)}}</p>
@@ -66,7 +66,13 @@
                 </div>
                 <div class="flex justify-center w-full mb-8 items-center">
                     <div class="flex justify-between w-1/2 items-center">
-                        <x-jet-button class="bg-blue-600">Unsubscribe</x-jet-button>
+                        @if($subscription->paddle_status !== \Laravel\Paddle\Subscription::STATUS_DELETED)
+                            <form action="{{route('subscriptions.destroy')}}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <x-jet-button class="bg-blue-600">Unsubscribe</x-jet-button>
+                            </form>
+                        @endif
                         <x-jet-button class="bg-blue-600">Change plan</x-jet-button>
                     </div>
                 </div>
